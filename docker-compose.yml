@@ -1,0 +1,67 @@
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: recruivo_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-recruivo_db}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - recruivo_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Laravel
+  laravel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: recruivo
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:80"
+    volumes:
+      - .:/var/www/html:cached
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - recruivo_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: recruivo_redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - recruivo_network
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  recruivo_network:
+    driver: bridge
