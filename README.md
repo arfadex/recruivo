@@ -82,6 +82,7 @@ cp .env.docker.example .env
 # Important when using Docker:
 #   DB_HOST=mysql
 
+chmod +x deploy/docker-start.sh
 bash deploy/docker-start.sh
 ```
 This will build containers, install Composer/NPM deps, generate app key, run migrations with seeders, and build assets. When done:
