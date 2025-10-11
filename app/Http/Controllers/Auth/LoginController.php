@@ -25,7 +25,7 @@ class LoginController extends Controller
 
         if ($user && !$user->hasVerifiedEmail()) {
             return back()->withErrors([
-                'email' => 'Please verify your email address before logging in.',
+                'email' => __('auth.email_not_verified'),
             ])->withInput();
         }
 
@@ -50,7 +50,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'These credentials do not match our records.',
+            'email' => __('auth.invalid_credentials'),
         ])->withInput();
     }
 

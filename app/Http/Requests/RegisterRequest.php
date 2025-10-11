@@ -71,7 +71,7 @@ class RegisterRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'company.name.required_if' => 'Please tell us the company name so candidates can recognise your brand.',
+            'company.name.required_if' => __('validation.company_name_required'),
         ];
     }
 }

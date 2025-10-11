@@ -25,7 +25,9 @@ return [
     'company_email' => 'Company Email',
     'location' => 'Location',
     'website_url' => 'Website URL',
+    'website_placeholder' => 'https://www.example.com',
     'linkedin_url' => 'LinkedIn URL',
+    'linkedin_placeholder' => 'https://www.linkedin.com/company/your-company',
     'company_logo' => 'Company Logo',
     'choose_logo' => 'Choose Logo',
     'logo_formats' => 'Supported formats: JPG, PNG, SVG (Max 2MB)',
@@ -59,5 +61,15 @@ return [
     'delete_account_button' => 'Delete Account',
     'delete_account_confirm' => 'Are you sure you want to delete your account? This action cannot be undone.',
     'delete_account_confirmation' => 'Are you sure you want to delete your account? This action cannot be undone.',
+    
+    // Flash Messages
+    'profile_updated' => 'Profile updated successfully!',
+    'password_changed' => 'Password changed successfully!',
+    'email_verification_sent' => 'Verification email sent! Please check your new email inbox.',
+    'no_pending_email' => 'No pending email change found.',
+    'invalid_verification_link' => 'Invalid verification link.',
+    'email_updated' => 'Email address updated successfully!',
+    'account_deleted' => 'Account deleted successfully.',
+    'resume_not_found' => 'Resume not found.',
+    'resume_file_not_found' => 'Resume file not found.',
 ];
-

@@ -60,5 +60,10 @@ return [
     'onsite' => 'On-site',
     'apply_filters' => 'Apply Filters',
     'clear_filters' => 'Clear Filters',
+    'Back to Blog' => 'Back to Blog',
+    'By' => 'By',
+    'All Posts' => 'All Posts',
+    'Share' => 'Share',
+    'toggle_theme' => 'Toggle theme',
+    'dismiss' => 'Dismiss',
 ];
-

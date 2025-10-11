@@ -60,5 +60,10 @@ return [
     'onsite' => 'Sur site',
     'apply_filters' => 'Appliquer les filtres',
     'clear_filters' => 'Effacer les filtres',
+    'Back to Blog' => 'Retour au blog',
+    'By' => 'Par',
+    'All Posts' => 'Tous les articles',
+    'Share' => 'Partager',
+    'toggle_theme' => 'Basculer le thème',
+    'dismiss' => 'Fermer',
 ];
-

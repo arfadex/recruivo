@@ -86,6 +86,7 @@ return [
     'view_applications_title' => 'Voir les candidatures',
     'edit_job_title_attr' => 'Modifier l\'offre',
     'delete_job_title' => 'Supprimer l\'offre',
+    'delete_job' => 'Supprimer l\'offre',
     'delete_job_confirm' => 'Êtes-vous sûr de vouloir supprimer cette offre ? Cette action ne peut pas être annulée.',
     'unpublish' => 'Dépublier',
     'publish' => 'Publier',
@@ -112,5 +113,14 @@ return [
     'decision_made' => 'Décision prise',
     'decision_final_message' => 'Cette candidature a été :status. La décision est finale et ne peut pas être modifiée.',
     'add_notes_placeholder' => 'Ajouter des notes (requis lors de l\'acceptation/rejet)...',
+    
+    // Flash Messages
+    'job_created' => 'Emploi créé avec succès !',
+    'job_updated' => 'Emploi mis à jour avec succès !',
+    'job_deleted' => 'Emploi supprimé avec succès !',
+    'job_published' => 'Emploi publié avec succès !',
+    'job_unpublished' => 'Emploi dépublié avec succès !',
+    'application_updated' => 'Statut de la candidature mis à jour avec succès !',
+    'resume_not_found' => 'CV introuvable.',
+    'company_required' => 'Vous devez avoir une entreprise pour accéder au tableau de bord recruteur.',
 ];
-

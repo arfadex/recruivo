@@ -38,6 +38,12 @@ return [
     
     // Register page
     'register_title' => 'Créez votre compte',
+    
+    // Error Messages
+    'email_not_verified' => 'Veuillez vérifier votre adresse e-mail avant de vous connecter.',
+    'email_not_verified_api' => 'Votre adresse e-mail n\'est pas vérifiée.',
+    'invalid_credentials' => 'Ces identifiants ne correspondent pas à nos enregistrements.',
+    'current_password_incorrect' => 'Le mot de passe actuel est incorrect.',
     'register_subtitle' => 'Enregistrez vos recherches d\'emploi, suivez les entreprises que vous admirez et soyez notifié lorsque le poste idéal est publié.',
     'account_type' => 'Type de compte',
     'account_type_candidate' => 'Candidat',
@@ -104,8 +110,10 @@ return [
     
     // Email verification
     'verify_email_title' => 'Vérifiez votre adresse e-mail',
-    'verify_email_desc' => 'Merci de vous être inscrit ! Avant de commencer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer ? Si vous n\'avez pas reçu l\'e-mail, nous vous en enverrons volontiers un autre.',
+    'verify_email_short' => 'Vérifiez votre e-mail',
+    'verify_email_desc' => 'Merci de vous être inscrit ! Avant de commencer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer par e-mail ? Si vous n\'avez pas reçu l\'e-mail, nous vous en enverrons un autre avec plaisir.',
+    'verify_email_desc_short' => 'merci de vous être inscrit ! Avant de commencer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer par e-mail ?',
     'verification_link_sent' => 'Un nouveau lien de vérification a été envoyé à l\'adresse e-mail que vous avez fournie lors de l\'inscription.',
     'resend_verification' => 'Renvoyer l\'e-mail de vérification',
+    'log_out' => 'Se déconnecter',
 ];
-

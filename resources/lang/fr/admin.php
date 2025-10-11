@@ -63,5 +63,8 @@ return [
     'admin' => 'Administrateur',
     'recruiter' => 'Recruteur',
     'candidate' => 'Candidat',
+    
+    // Flash Messages
+    'user_deleted' => 'Utilisateur supprimé avec succès.',
+    'cannot_delete_admin' => 'Impossible de supprimer les utilisateurs administrateurs.',
 ];
-

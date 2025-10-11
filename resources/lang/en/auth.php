@@ -31,19 +31,23 @@ return [
     'email_placeholder' => 'you@example.com',
     'password_placeholder' => 'Enter your password',
     'login_button' => 'Log in',
-    'new_to_recruivo' => 'New to Recruivo?',
     'create_account' => 'Create an account',
     'email_verified' => 'Email verified successfully! You can now log in to your account.',
     'account_created' => 'Account created successfully! You can now log in to your account.',
     
     // Register page
-    'register_title' => 'Create your account',
+    'register_title' => 'Create Your Account',
+    
+    // Error Messages
+    'email_not_verified' => 'Please verify your email address before logging in.',
+    'email_not_verified_api' => 'Your email address is not verified.',
+    'invalid_credentials' => 'These credentials do not match our records.',
+    'current_password_incorrect' => 'Current password is incorrect.',
     'register_subtitle' => 'Save job searches, follow companies you admire, and get notified when the perfect role is published.',
     'account_type' => 'Account type',
     'account_type_candidate' => 'Candidate',
     'account_type_candidate_desc' => 'Find your next role',
     'account_type_company' => 'Company',
-    'account_type_company_desc' => 'Hire great talent',
     'full_name' => 'Full name',
     'full_name_placeholder' => 'John Doe',
     'company_name_placeholder' => 'Acme Inc.',
@@ -104,8 +108,11 @@ return [
     
     // Email verification
     'verify_email_title' => 'Verify your email address',
+    'verify_email_short' => 'Verify your email',
     'verify_email_desc' => 'Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.',
+    'verify_email_desc_short' => 'Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?',
     'verification_link_sent' => 'A new verification link has been sent to the email address you provided during registration.',
     'resend_verification' => 'Resend Verification Email',
+    'log_out' => 'Log Out',
 ];
 

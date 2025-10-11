@@ -40,16 +40,16 @@ class UpdateCompanyProfileRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.max' => 'The company name may not be greater than 255 characters.',
-            'tagline.max' => 'The tagline may not be greater than 255 characters.',
-            'location.max' => 'The location may not be greater than 255 characters.',
-            'website_url.url' => 'Please provide a valid website URL.',
-            'linkedin_url.url' => 'Please provide a valid LinkedIn URL.',
-            'email.email' => 'Please provide a valid email address.',
-            'size.max' => 'The company size may not be greater than 50 characters.',
-            'founded_year.integer' => 'The founded year must be a valid year.',
-            'founded_year.min' => 'The founded year must be after 1800.',
-            'founded_year.max' => 'The founded year cannot be in the future.',
+            'name.max' => __('validation.company_name_max', ['max' => 255]),
+            'tagline.max' => __('validation.tagline_max', ['max' => 255]),
+            'location.max' => __('validation.location_max', ['max' => 255]),
+            'website_url.url' => __('validation.website_url_invalid'),
+            'linkedin_url.url' => __('validation.linkedin_url_invalid'),
+            'email.email' => __('validation.email_invalid'),
+            'size.max' => __('validation.company_size_max', ['max' => 50]),
+            'founded_year.integer' => __('validation.founded_year_invalid'),
+            'founded_year.min' => __('validation.founded_year_min', ['min' => 1800]),
+            'founded_year.max' => __('validation.founded_year_future'),
         ];
     }
 }

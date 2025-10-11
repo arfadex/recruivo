@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $company = $user->company;
 
         if (!$company) {
-            return redirect(localized_route('home'))->with('error', 'You must have a company to access the recruiter dashboard.');
+            return redirect(localized_route('home'))->with('error', __('recruiter.company_required'));
         }
 
         $totalJobs = $company->jobs()->count();

@@ -16,14 +16,14 @@ class ResumeController extends Controller
         $user = auth()->user();
         
         if (!$user->candidateProfile || !$user->candidateProfile->resume_path) {
-            abort(404, 'Resume not found.');
+            abort(404, __('profile.resume_not_found'));
         }
         
         $resumePath = $user->candidateProfile->resume_path;
         
         // Check if file exists
         if (!Storage::disk('public')->exists($resumePath)) {
-            abort(404, 'Resume file not found.');
+            abort(404, __('profile.resume_file_not_found'));
         }
         
         // Get file content and MIME type

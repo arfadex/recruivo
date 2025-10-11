@@ -46,7 +46,7 @@ class JobController extends Controller
 
         return redirect()
             ->route('recruiter.jobs.index', ['locale' => app()->getLocale()])
-            ->with('success', 'Job created successfully!');
+            ->with('success', __('recruiter.job_created'));
     }
 
     public function show(string $locale, Job $job)
@@ -85,7 +85,7 @@ class JobController extends Controller
 
         return redirect()
             ->route('recruiter.jobs.index', ['locale' => app()->getLocale()])
-            ->with('success', 'Job updated successfully!');
+            ->with('success', __('recruiter.job_updated'));
     }
 
     public function destroy(string $locale, Job $job)
@@ -96,7 +96,7 @@ class JobController extends Controller
 
         return redirect()
             ->route('recruiter.jobs.index', ['locale' => app()->getLocale()])
-            ->with('success', 'Job deleted successfully!');
+            ->with('success', __('recruiter.job_deleted'));
     }
 
     public function toggle(string $locale, Job $job)
@@ -108,13 +108,13 @@ class JobController extends Controller
                 'status' => JobStatus::Draft,
                 'published_at' => null,
             ]);
-            $message = 'Job unpublished successfully!';
+            $message = __('recruiter.job_unpublished');
         } else {
             $job->update([
                 'status' => JobStatus::Published,
                 'published_at' => now(),
             ]);
-            $message = 'Job published successfully!';
+            $message = __('recruiter.job_published');
         }
 
         return back()->with('success', $message);

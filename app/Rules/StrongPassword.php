@@ -28,13 +28,13 @@ class StrongPassword implements ValidationRule
     {
         // Check length: 12-64 characters
         if (strlen($value) < 12 || strlen($value) > 64) {
-            $fail('The :attribute must be between 12 and 64 characters.');
+            $fail(__('validation.password_length'));
             return;
         }
 
         // Check if password contains username (case-insensitive)
         if ($this->username && stripos($value, $this->username) !== false) {
-            $fail('The :attribute must not contain your username.');
+            $fail(__('validation.password_no_username'));
             return;
         }
 
@@ -47,7 +47,7 @@ class StrongPassword implements ValidationRule
         $typesCount = $hasUpperCase + $hasLowerCase + $hasNumber + $hasSymbol;
 
         if ($typesCount < 3) {
-            $fail('The :attribute must include at least 3 of the following: uppercase letters, lowercase letters, numbers, and symbols.');
+            $fail(__('validation.password_complexity'));
             return;
         }
     }

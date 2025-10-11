@@ -173,7 +173,7 @@
                         name="company[website_url]"
                         type="url"
                         value="{{ old('company.website_url', $user->company->website_url) }}"
-                        placeholder="https://www.example.com"
+                        placeholder="{{ __('profile.website_placeholder') }}"
                         class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
                     />
                 </div>
@@ -187,7 +187,7 @@
                         name="company[linkedin_url]"
                         type="url"
                         value="{{ old('company.linkedin_url', $user->company->linkedin_url) }}"
-                        placeholder="https://www.linkedin.com/company/your-company"
+                        placeholder="{{ __('profile.linkedin_placeholder') }}"
                         class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
                     />
                 </div>

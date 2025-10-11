@@ -71,7 +71,7 @@ class ProfileController extends Controller
             }
         }
 
-        return back()->with('success', 'Profile updated successfully!');
+        return back()->with('success', __('profile.profile_updated'));
     }
 
     public function changePassword(ChangePasswordRequest $request)
@@ -80,7 +80,7 @@ class ProfileController extends Controller
         $data = $request->validated();
 
         if (!Hash::check($data['current_password'], $user->password)) {
-            return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+            return back()->withErrors(['current_password' => __('auth.current_password_incorrect')]);
         }
 
         $user->update([
@@ -90,7 +90,7 @@ class ProfileController extends Controller
         // Send notification
         $user->notify(new \App\Notifications\PasswordChangedNotification($user));
 
-        return back()->with('success', 'Password changed successfully!');
+        return back()->with('success', __('profile.password_changed'));
     }
 
     public function requestEmailChange(Request $request)
@@ -118,7 +118,7 @@ class ProfileController extends Controller
         \Illuminate\Support\Facades\Notification::route('mail', $newEmail)
             ->notify(new \App\Notifications\EmailChangeVerificationNotification($user));
 
-        return back()->with('success', 'Verification email sent! Please check your new email inbox.');
+        return back()->with('success', __('profile.email_verification_sent'));
     }
 
     public function verifyEmailChange(Request $request, string $locale, $id, $hash)
@@ -126,12 +126,12 @@ class ProfileController extends Controller
         $user = \App\Models\User::findOrFail($id);
 
         if (!$user->pending_email) {
-            return redirect(localized_route('profile.edit'))->with('error', 'No pending email change found.');
+            return redirect(localized_route('profile.edit'))->with('error', __('profile.no_pending_email'));
         }
 
         // Verify hash matches pending email
         if (!hash_equals($hash, sha1($user->pending_email))) {
-            return redirect(localized_route('profile.edit'))->with('error', 'Invalid verification link.');
+            return redirect(localized_route('profile.edit'))->with('error', __('profile.invalid_verification_link'));
         }
 
         $oldEmail = $user->email;
@@ -150,7 +150,7 @@ class ProfileController extends Controller
         \Illuminate\Support\Facades\Notification::route('mail', $oldEmail)
             ->notify(new \App\Notifications\EmailChangedNotification($user, $oldEmail));
 
-        return redirect(localized_route('profile.edit'))->with('success', 'Email address updated successfully!');
+        return redirect(localized_route('profile.edit'))->with('success', __('profile.email_updated'));
     }
 
     public function destroy(Request $request, string $locale, UserAccountDeletionService $deletionService)
@@ -163,7 +163,7 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect(localized_route('home'))->with('success', 'Account deleted successfully.');
+        return redirect(localized_route('home'))->with('success', __('profile.account_deleted'));
     }
 }
 

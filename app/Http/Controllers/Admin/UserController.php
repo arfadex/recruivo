@@ -39,12 +39,12 @@ class UserController extends Controller
     public function destroy(string $locale, User $user, UserAccountDeletionService $deletionService)
     {
         if ($user->hasRole('Admin')) {
-            return back()->with('error', 'Cannot delete admin users.');
+            return back()->with('error', __('admin.cannot_delete_admin'));
         }
 
         $deletionService->deleteUserAccount($user, false); // false = initiated by admin, not user
 
-        return back()->with('success', 'User deleted successfully.');
+        return back()->with('success', __('admin.user_deleted'));
     }
 }
 

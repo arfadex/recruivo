@@ -25,7 +25,9 @@ return [
     'company_email' => 'E-mail de l\'entreprise',
     'location' => 'Localisation',
     'website_url' => 'URL du site web',
+    'website_placeholder' => 'https://www.exemple.fr',
     'linkedin_url' => 'URL LinkedIn',
+    'linkedin_placeholder' => 'https://www.linkedin.com/company/votre-entreprise',
     'company_logo' => 'Logo de l\'entreprise',
     'choose_logo' => 'Choisir un logo',
     'logo_formats' => 'Formats supportés : JPG, PNG, SVG (Max 2 Mo)',
@@ -59,5 +61,15 @@ return [
     'delete_account_button' => 'Supprimer le compte',
     'delete_account_confirm' => 'Êtes-vous sûr de vouloir supprimer votre compte ? Cette action ne peut pas être annulée.',
     'delete_account_confirmation' => 'Êtes-vous sûr de vouloir supprimer votre compte ? Cette action ne peut pas être annulée.',
+    
+    // Flash Messages
+    'profile_updated' => 'Profil mis à jour avec succès !',
+    'password_changed' => 'Mot de passe modifié avec succès !',
+    'email_verification_sent' => 'E-mail de vérification envoyé ! Veuillez vérifier votre nouvelle boîte de réception.',
+    'no_pending_email' => 'Aucun changement d\'e-mail en attente.',
+    'invalid_verification_link' => 'Lien de vérification invalide.',
+    'email_updated' => 'Adresse e-mail mise à jour avec succès !',
+    'account_deleted' => 'Compte supprimé avec succès.',
+    'resume_not_found' => 'CV introuvable.',
+    'resume_file_not_found' => 'Fichier CV introuvable.',
 ];
-

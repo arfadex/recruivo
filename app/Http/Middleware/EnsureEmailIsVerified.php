@@ -29,7 +29,7 @@ class EnsureEmailIsVerified
             $locale = $request->route('locale') ?? app()->getLocale();
             
             return $request->expectsJson()
-                    ? abort(403, 'Your email address is not verified.')
+                    ? abort(403, __('auth.email_not_verified_api'))
                     : Redirect::route($redirectToRoute ?: 'verification.notice', ['locale' => $locale]);
         }
 

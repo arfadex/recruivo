@@ -37,7 +37,7 @@ class ApplicationController extends Controller
             );
         }
 
-        return back()->with('success', 'Application status updated successfully!');
+        return back()->with('success', __('recruiter.application_updated'));
     }
 
     public function downloadResume(string $locale, Application $application)
@@ -47,7 +47,7 @@ class ApplicationController extends Controller
         $profile = $application->candidate->candidateProfile;
 
         if (!$profile || !$profile->resume_path) {
-            return back()->with('error', 'Resume not found.');
+            return back()->with('error', __('recruiter.resume_not_found'));
         }
 
         return Storage::disk('public')->download($profile->resume_path);

@@ -77,8 +77,8 @@ class UpdateApplicationStatusRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'notes.required' => 'Please include a note when accepting or rejecting an application.',
-            'status.in' => 'Status must be either pending, accepted, or rejected.',
+            'notes.required' => __('validation.notes_required_status'),
+            'status.in' => __('validation.status_invalid'),
         ];
     }
 }

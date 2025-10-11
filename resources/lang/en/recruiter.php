@@ -86,6 +86,7 @@ return [
     'view_applications_title' => 'View Applications',
     'edit_job_title_attr' => 'Edit Job',
     'delete_job_title' => 'Delete Job',
+    'delete_job' => 'Delete Job',
     'delete_job_confirm' => 'Are you sure you want to delete this job? This action cannot be undone.',
     'unpublish' => 'Unpublish',
     'publish' => 'Publish',
@@ -112,5 +113,14 @@ return [
     'decision_made' => 'Decision Made',
     'decision_final_message' => 'This application has been :status. The decision is final and cannot be changed.',
     'add_notes_placeholder' => 'Add notes (required when accepting/rejecting)...',
+    
+    // Flash Messages
+    'job_created' => 'Job created successfully!',
+    'job_updated' => 'Job updated successfully!',
+    'job_deleted' => 'Job deleted successfully!',
+    'job_published' => 'Job published successfully!',
+    'job_unpublished' => 'Job unpublished successfully!',
+    'application_updated' => 'Application status updated successfully!',
+    'resume_not_found' => 'Resume not found.',
+    'company_required' => 'You must have a company to access the recruiter dashboard.',
 ];
-
