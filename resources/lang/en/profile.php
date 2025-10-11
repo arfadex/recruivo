@@ -24,6 +24,8 @@ return [
     'tagline' => 'Tagline',
     'company_email' => 'Company Email',
     'location' => 'Location',
+    'website_url' => 'Website URL',
+    'linkedin_url' => 'LinkedIn URL',
     'company_logo' => 'Company Logo',
     'choose_logo' => 'Choose Logo',
     'logo_formats' => 'Supported formats: JPG, PNG, SVG (Max 2MB)',

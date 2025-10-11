@@ -32,6 +32,16 @@ class UpdateProfileRequest extends FormRequest
             'phone' => 'sometimes|nullable|string|max:20',
             'profile_summary' => 'sometimes|nullable|string|max:1000',
             'resume' => 'sometimes|nullable|file|mimes:pdf,doc,docx|max:5120',
+            // Company fields for recruiters
+            'company.name' => 'sometimes|string|max:255',
+            'company.tagline' => 'sometimes|nullable|string|max:255',
+            'company.email' => 'sometimes|nullable|email|max:255',
+            'company.location' => 'sometimes|nullable|string|max:255',
+            'company.website_url' => 'sometimes|nullable|url|max:255',
+            'company.linkedin_url' => 'sometimes|nullable|url|max:255',
+            'company.mission' => 'sometimes|nullable|string',
+            'company.culture' => 'sometimes|nullable|string',
+            'logo' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 

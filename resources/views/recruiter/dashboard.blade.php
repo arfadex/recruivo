@@ -106,10 +106,10 @@
                     <div class="flex items-center justify-between rounded-lg border border-slate-200 p-4 dark:border-slate-700">
                         <div class="flex items-center gap-4">
                             <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-400">
-                                {{ substr($application->user->name, 0, 1) }}
+                                {{ substr($application->candidate->name, 0, 1) }}
                             </div>
                             <div>
-                                <h3 class="font-medium text-slate-900 dark:text-white">{{ $application->user->name }}</h3>
+                                <h3 class="font-medium text-slate-900 dark:text-white">{{ $application->candidate->name }}</h3>
                                 <p class="text-sm text-slate-600 dark:text-slate-400">{{ $application->job->title }}</p>
                             </div>
                         </div>

@@ -64,14 +64,16 @@
                             </span>
                         @endif
                         @if($job->remote_type)
-                            <span class="rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300">
-                                {{ __('recruiter.' . $job->remote_type) }}
-                            </span>
+                            <a href="{{ localized_route('search', ['search' => '', 'remote_type' => strtolower($job->remote_type)]) }}" 
+                               class="rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-700 transition hover:bg-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-300 dark:hover:bg-indigo-500/20">
+                                {{ __('recruiter.' . str_replace('-', '', strtolower($job->remote_type))) }}
+                            </a>
                         @endif
                         @if($job->category)
-                            <span class="rounded-full bg-purple-100 px-3 py-1 text-sm font-medium text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
-                                {{ __('recruiter.' . strtolower($job->category)) }}
-                            </span>
+                            <a href="{{ localized_route('search', ['search' => $job->category]) }}" 
+                               class="rounded-full bg-purple-100 px-3 py-1 text-sm font-medium text-purple-700 transition hover:bg-purple-200 dark:bg-purple-500/10 dark:text-purple-300 dark:hover:bg-purple-500/20">
+                                {{ $job->category }}
+                            </a>
                         @endif
                     </div>
 

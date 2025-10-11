@@ -165,6 +165,34 @@
                 </div>
 
                 <div class="space-y-2">
+                    <label for="company_website_url" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                        {{ __('profile.website_url') }}
+                    </label>
+                    <input
+                        id="company_website_url"
+                        name="company[website_url]"
+                        type="url"
+                        value="{{ old('company.website_url', $user->company->website_url) }}"
+                        placeholder="https://www.example.com"
+                        class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                    />
+                </div>
+
+                <div class="space-y-2">
+                    <label for="company_linkedin_url" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                        {{ __('profile.linkedin_url') }}
+                    </label>
+                    <input
+                        id="company_linkedin_url"
+                        name="company[linkedin_url]"
+                        type="url"
+                        value="{{ old('company.linkedin_url', $user->company->linkedin_url) }}"
+                        placeholder="https://www.linkedin.com/company/your-company"
+                        class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                    />
+                </div>
+
+                <div class="space-y-2">
                     <label for="logo" class="text-sm font-medium text-slate-700 dark:text-slate-200">
                         {{ __('profile.company_logo') }}
                     </label>

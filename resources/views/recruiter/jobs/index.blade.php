@@ -86,12 +86,12 @@
                                 @endif
                                 @if($job->remote_type)
                                     <span class="rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300">
-                                        {{ __('recruiter.' . $job->remote_type) }}
+                                        {{ __('recruiter.' . str_replace('-', '', strtolower($job->remote_type))) }}
                                     </span>
                                 @endif
                                 @if($job->category)
                                     <span class="rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
-                                        {{ __('recruiter.' . strtolower($job->category)) }}
+                                        {{ $job->category }}
                                     </span>
                                 @endif
                             </div>

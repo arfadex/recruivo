@@ -16,7 +16,7 @@ class ApplicationController extends Controller
         $this->authorize('view', $job);
 
         $applications = $job->applications()
-            ->with(['user.candidateProfile'])
+            ->with(['candidate.candidateProfile'])
             ->latest()
             ->paginate(20);
 
@@ -32,7 +32,7 @@ class ApplicationController extends Controller
 
         // Send notification if status changed
         if ($previousStatus != $application->status) {
-            $application->user->notify(
+            $application->candidate->notify(
                 new \App\Notifications\ApplicationStatusUpdatedNotification($application)
             );
         }
@@ -44,7 +44,7 @@ class ApplicationController extends Controller
     {
         $this->authorize('view', $application);
 
-        $profile = $application->user->candidateProfile;
+        $profile = $application->candidate->candidateProfile;
 
         if (!$profile || !$profile->resume_path) {
             return back()->with('error', 'Resume not found.');

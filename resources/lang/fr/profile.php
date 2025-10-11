@@ -24,6 +24,8 @@ return [
     'tagline' => 'Slogan',
     'company_email' => 'E-mail de l\'entreprise',
     'location' => 'Localisation',
+    'website_url' => 'URL du site web',
+    'linkedin_url' => 'URL LinkedIn',
     'company_logo' => 'Logo de l\'entreprise',
     'choose_logo' => 'Choisir un logo',
     'logo_formats' => 'Formats supportés : JPG, PNG, SVG (Max 2 Mo)',

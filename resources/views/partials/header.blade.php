@@ -21,7 +21,7 @@
                 <a href="{{ localized_route('jobs.index') }}" class="transition hover:text-indigo-600 dark:hover:text-indigo-400 {{ request()->routeIs('jobs.*') ? 'text-indigo-600 dark:text-indigo-400' : '' }}">
                     {{ __('common.jobs') }}
                 </a>
-                <a href="{{ localized_route('companies.index') }}" class="transition hover:text-indigo-600 dark:hover:text-indigo-400 {{ request()->routeIs('companies.*') ? 'text-indigo-600 dark:text-indigo-400' : '' }}">
+                <a href="{{ localized_route('companies.index') }}" class="transition hover:text-indigo-600 dark:hover:text-indigo-400 {{ request()->routeIs('companies.*') && !($isRecruiter && request()->routeIs('companies.show') && request()->route('slug') == $user->company?->slug) ? 'text-indigo-600 dark:text-indigo-400' : '' }}">
                     {{ __('common.companies') }}
                 </a>
                 @if($isRecruiter)

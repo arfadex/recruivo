@@ -32,7 +32,7 @@ class DashboardController extends Controller
         $recentApplications = \App\Models\Application::whereHas('job', function ($query) use ($company) {
             $query->where('company_id', $company->id);
         })
-            ->with(['user', 'job'])
+            ->with(['candidate', 'job'])
             ->latest()
             ->take(5)
             ->get();

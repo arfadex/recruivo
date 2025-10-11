@@ -48,13 +48,13 @@
                         <div class="flex-1">
                             <div class="flex items-center gap-3 mb-3">
                                 <div class="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-lg font-semibold text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-400">
-                                    {{ substr($application->user->name, 0, 1) }}
+                                    {{ substr($application->candidate->name, 0, 1) }}
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
-                                        {{ $application->user->name }}
+                                        {{ $application->candidate->name }}
                                     </h3>
-                                    <p class="text-sm text-slate-600 dark:text-slate-400">{{ $application->user->email }}</p>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400">{{ $application->candidate->email }}</p>
                                 </div>
                                 @if($application->status->value === 'pending')
                                     <span class="inline-flex items-center rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-700 dark:bg-yellow-500/10 dark:text-yellow-400">
@@ -75,10 +75,10 @@
                                 <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">
                                     {{ __('recruiter.applied_time', ['time' => $application->created_at->diffForHumans()]) }}
                                 </p>
-                                @if($application->user->candidateProfile)
+                                @if($application->candidate->candidateProfile)
                                     <div class="text-sm text-slate-600 dark:text-slate-400">
-                                        <p><strong>{{ __('recruiter.phone') }}</strong> {{ $application->user->phone ?? __('recruiter.not_provided') }}</p>
-                                        @if($application->user->candidateProfile->resume_path)
+                                        <p><strong>{{ __('recruiter.phone') }}</strong> {{ $application->candidate->phone ?? __('recruiter.not_provided') }}</p>
+                                        @if($application->candidate->candidateProfile->resume_path)
                                             <p><strong>{{ __('recruiter.resume') }}</strong> 
                                                 <a href="{{ localized_route('recruiter.applications.resume', $application) }}" 
                                                    class="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
