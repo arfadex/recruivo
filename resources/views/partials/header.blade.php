@@ -57,7 +57,7 @@
             <button
                 id="mobile-search-toggle"
                 type="button"
-                class="inline-flex items-center justify-center rounded-full p-2 text-slate-600 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 sm:hidden"
+                class="inline-flex items-center justify-center rounded-full p-1.5 text-slate-600 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 sm:hidden"
             >
                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -76,7 +76,7 @@
                         type="search"
                         placeholder="{{ __('common.search_placeholder') }}"
                         autocomplete="off"
-                        class="search-input w-48 lg:w-64 rounded-full border border-slate-200 bg-white/80 py-2 pl-4 pr-10 text-sm text-slate-600 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:focus:border-indigo-500 text-ellipsis"
+                        class="search-input w-48 lg:w-64 rounded-full border border-slate-200 bg-white/80 py-1.5 pl-4 pr-10 text-sm text-slate-600 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:focus:border-indigo-500 text-ellipsis"
                     />
                     <button
                         type="submit"
@@ -96,7 +96,7 @@
                         <button
                             @click="open = !open"
                             @click.away="open = false"
-                            class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                            class="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
                         >
                             @if($isRecruiter && $user->company && $user->company->logo_url)
                                 <img
@@ -155,7 +155,7 @@
                         @csrf
                         <button
                             type="submit"
-                            class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                            class="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
                         >
                             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
@@ -167,13 +167,13 @@
             @else
                 <a
                     href="{{ localized_route('login') }}"
-                    class="mobile-hidden-auth inline-flex items-center justify-center whitespace-nowrap rounded-full border border-slate-200/80 px-3 py-2 text-sm font-semibold text-slate-600 transition hover:border-indigo-300 hover:text-indigo-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-indigo-400 dark:hover:text-indigo-300"
+                    class="mobile-hidden-auth inline-flex items-center justify-center whitespace-nowrap rounded-full border border-slate-200/80 px-3 py-1.5 text-sm font-semibold text-slate-600 transition hover:border-indigo-300 hover:text-indigo-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-indigo-400 dark:hover:text-indigo-300"
                 >
                     {{ __('common.log_in') }}
                 </a>
                 <a
                     href="{{ localized_route('register') }}"
-                    class="mobile-hidden-auth inline-flex items-center justify-center whitespace-nowrap rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:hover:bg-indigo-500/90"
+                    class="mobile-hidden-auth inline-flex items-center justify-center whitespace-nowrap rounded-full bg-indigo-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:hover:bg-indigo-500/90"
                 >
                     {{ __('common.sign_up') }}
                 </a>
@@ -207,7 +207,7 @@
                 <button
                     @click="open = !open"
                     @click.away="open = false"
-                    class="inline-flex items-center gap-1 justify-center rounded-full px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                    class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
                 >
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
@@ -234,7 +234,7 @@
             <button
                 id="theme-toggle"
                 type="button"
-                class="inline-flex items-center justify-center rounded-full p-2 text-slate-600 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                class="inline-flex items-center justify-center rounded-full p-1.5 text-slate-600 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
             >
                 <svg class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
