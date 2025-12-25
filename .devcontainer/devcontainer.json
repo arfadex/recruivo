@@ -1,16 +1,16 @@
 {
   "name": "Recruivo - Laravel Development",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
-  "workspaceFolder": "/workspace",
+  "image": "mcr.microsoft.com/devcontainers/php:1-8.2-bullseye",
 
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
-    }
+    },
+    "ghcr.io/devcontainers-contrib/features/mysql-homebrew:1": {},
+    "ghcr.io/devcontainers/features/redis-server:1": {}
   },
 
-  "forwardPorts": [8000, 5173, 3306, 6379],
+  "forwardPorts": [8000, 5173],
   "portsAttributes": {
     "8000": {
       "label": "Laravel App",
@@ -18,14 +18,6 @@
     },
     "5173": {
       "label": "Vite Dev Server",
-      "onAutoForward": "silent"
-    },
-    "3306": {
-      "label": "MySQL",
-      "onAutoForward": "silent"
-    },
-    "6379": {
-      "label": "Redis",
       "onAutoForward": "silent"
     }
   },
@@ -41,9 +33,7 @@
         "mikestead.dotenv",
         "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "EditorConfig.EditorConfig",
-        "xdebug.php-debug"
+        "esbenp.prettier-vscode"
       ],
       "settings": {
         "php.validate.executablePath": "/usr/local/bin/php",
@@ -60,7 +50,5 @@
         }
       }
     }
-  },
-
-  "remoteUser": "vscode"
+  }
 }
