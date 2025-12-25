@@ -14,11 +14,11 @@ echo "==> Setting up environment file..."
 if [ ! -f .env ]; then
     cp .env.example .env
     
-    sed -i 's/DB_HOST=127.0.0.1/DB_HOST=127.0.0.1/' .env
+    sed -i 's/DB_HOST=127.0.0.1/DB_HOST=mysql/' .env
     sed -i 's/DB_USERNAME=root/DB_USERNAME=root/' .env
-    sed -i 's/DB_PASSWORD=$/DB_PASSWORD=/' .env
+    sed -i 's/DB_PASSWORD=/DB_PASSWORD=root/' .env
     
-    echo "REDIS_HOST=127.0.0.1" >> .env
+    echo "REDIS_HOST=redis" >> .env
     
     php artisan key:generate
 fi
@@ -29,21 +29,15 @@ mkdir -p storage/logs
 mkdir -p bootstrap/cache
 chmod -R 775 storage bootstrap/cache 2>/dev/null || true
 
-echo "==> Starting MySQL service..."
-mysql.server start 2>/dev/null || sudo service mysql start 2>/dev/null || true
-
 echo "==> Waiting for MySQL to be ready..."
 for i in {1..30}; do
-    if mysql -u root -e "SELECT 1" 2>/dev/null; then
+    if mysqladmin ping -h mysql -u root -proot --silent 2>/dev/null; then
         echo "MySQL is ready!"
         break
     fi
     echo "Waiting for MySQL... ($i/30)"
     sleep 2
 done
-
-echo "==> Creating database..."
-mysql -u root -e "CREATE DATABASE IF NOT EXISTS recruivo_db;" 2>/dev/null || true
 
 echo "==> Running database migrations..."
 php artisan migrate --force
@@ -64,9 +58,6 @@ echo "============================================"
 echo ""
 echo "  Start the Laravel server:"
 echo "    php artisan serve"
-echo ""
-echo "  Start Vite dev server (for HMR):"
-echo "    npm run dev"
 echo ""
 echo "  Demo accounts:"
 echo "    Admin:     admin@recruivo.work / password"
