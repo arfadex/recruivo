@@ -1,25 +1,14 @@
-FROM mcr.microsoft.com/devcontainers/php:1-8.2-bullseye
+FROM serversideup/php:8.2-cli
+
+USER root
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
+    git \
+    unzip \
     default-mysql-client \
     redis-tools \
     && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) \
-        pdo_mysql \
-        mbstring \
-        exif \
-        pcntl \
-        bcmath \
-        zip \
-        gd \
-        opcache
+RUN install-php-extensions pdo_mysql redis gd zip bcmath pcntl exif opcache
 
-RUN pecl install redis && docker-php-ext-enable redis
+USER www-data
