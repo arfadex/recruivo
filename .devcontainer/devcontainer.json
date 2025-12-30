@@ -20,38 +20,19 @@
       "label": "Vite Dev Server",
       "onAutoForward": "silent"
     },
-    "3306": {
-      "label": "MySQL",
-      "onAutoForward": "silent"
-    },
-    "6379": {
-      "label": "Redis",
-      "onAutoForward": "silent"
-    },
     "8025": {
       "label": "Mailpit UI",
-      "onAutoForward": "silent"
-    },
-    "1025": {
-      "label": "Mailpit SMTP",
       "onAutoForward": "silent"
     }
   },
 
   "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "postStartCommand": "php artisan serve --host=0.0.0.0 --port=8000 > /dev/null 2>&1 &",
 
   "customizations": {
     "vscode": {
       "settings": {
-        "php.validate.executablePath": "/usr/local/bin/php",
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "[php]": {
-          "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
-        },
-        "[blade]": {
-          "editor.defaultFormatter": "shufo.vscode-blade-formatter"
-        }
+        "php.validate.executablePath": "/usr/local/bin/php"
       },
       "extensions": [
         "bmewburn.vscode-intelephense-client",
@@ -60,9 +41,7 @@
         "mikestead.dotenv",
         "bradlc.vscode-tailwindcss",
         "xdebug.php-debug",
-        "open-southeners.laravel-pint",
-        "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint"
+        "open-southeners.laravel-pint"
       ]
     }
   }

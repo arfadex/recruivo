@@ -1,6 +1,8 @@
 services:
   app:
-    image: mcr.microsoft.com/devcontainers/php:1-8.2-bullseye
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ..:/workspaces/${LOCAL_WORKSPACE_FOLDER_BASENAME}:cached
     command: sleep infinity
@@ -26,12 +28,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-    deploy:
-      resources:
-        limits:
-          memory: 1G
-        reservations:
-          memory: 256M
 
   redis:
     image: redis:7-alpine
@@ -44,21 +40,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-        reservations:
-          memory: 64M
 
   mailpit:
     image: axllent/mailpit:latest
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8025"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
 volumes:
   mysql-data:
