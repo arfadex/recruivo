@@ -1,6 +1,8 @@
 {
   "name": "Recruivo - Laravel Development",
-  "image": "mcr.microsoft.com/devcontainers/php:1-8.2-bullseye",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
@@ -8,13 +10,7 @@
     }
   },
 
-  "runServices": ["mysql", "redis"],
-
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-
-  "forwardPorts": [8000, 5173, 3306, 6379],
+  "forwardPorts": [8000, 5173, 3306, 6379, 8025, 1025],
   "portsAttributes": {
     "8000": {
       "label": "Laravel App",
@@ -23,6 +19,22 @@
     "5173": {
       "label": "Vite Dev Server",
       "onAutoForward": "silent"
+    },
+    "3306": {
+      "label": "MySQL",
+      "onAutoForward": "silent"
+    },
+    "6379": {
+      "label": "Redis",
+      "onAutoForward": "silent"
+    },
+    "8025": {
+      "label": "Mailpit UI",
+      "onAutoForward": "silent"
+    },
+    "1025": {
+      "label": "Mailpit SMTP",
+      "onAutoForward": "silent"
     }
   },
 
@@ -30,12 +42,27 @@
 
   "customizations": {
     "vscode": {
+      "settings": {
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[php]": {
+          "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+        },
+        "[blade]": {
+          "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+        }
+      },
       "extensions": [
         "bmewburn.vscode-intelephense-client",
         "shufo.vscode-blade-formatter",
         "onecentlin.laravel-blade",
         "mikestead.dotenv",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "xdebug.php-debug",
+        "open-southeners.laravel-pint",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
       ]
     }
   }
