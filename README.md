@@ -71,33 +71,75 @@ Open: `http://localhost:8000/`.
 
 ---
 
-## Run with Docker (Recommended for a quick demo)
+## Run with Docker (Recommended)
 
-There are two options.
+The easiest way to get Recruivo running. A single command handles environment setup, container building, and database initialization.
 
-### Option A — Helper script
-Requires a POSIX shell (macOS/Linux or Git Bash on Windows).
+### Quick Start
+
 ```bash
-cp .env.docker.example .env
-# Important when using Docker:
-#   DB_HOST=mysql
-
-chmod +x deploy/docker-start.sh
-bash deploy/docker-start.sh
+./deploy/docker-start.sh --fresh
 ```
-This will build containers, install Composer/NPM deps, generate app key, run migrations with seeders, and build assets. When done:
-- App: `http://localhost:8000`
 
-Useful Docker commands:
+This automatically:
+- Creates `.env` from `.env.docker.example` (if missing)
+- Generates `APP_KEY` (if empty)
+- Builds the multi-stage Docker image
+- Waits for MySQL and Redis health checks
+- Runs database migrations and seeders
+
+Application available at: **http://localhost:8000**
+
+### CLI Options
+
+| Option | Description |
+|--------|-------------|
+| `--fresh` | Fresh install with migrations and seeders |
+| `--seed` | Run database seeders |
+| `--no-migrate` | Skip database migrations |
+| `--build-only` | Build containers only, skip setup |
+| `--down` | Stop and remove containers |
+| `--logs` | View container logs |
+| `--help` | Show help message |
+
+### Architecture
+
+| Container | Description |
+|-----------|-------------|
+| `recruivo` | PHP 8.2 + Apache (Laravel app with pre-built Vite assets) |
+| `recruivo_mysql` | MySQL 8.0 |
+| `recruivo_redis` | Redis 7 (cache, sessions, queues) |
+
+### Common Operations
+
 ```bash
-docker compose logs -f
+# Shell access
+docker compose exec laravel bash
+
+# Artisan commands
 docker compose exec laravel php artisan tinker
-docker compose down
+
+# View logs
+docker compose logs -f
+
+# Rebuild after code changes
+docker compose up -d --build
+
+# Full reset (wipe data)
+docker compose down -v && ./deploy/docker-start.sh --fresh
 ```
 
-Environment notes for Docker:
-- Set `APP_URL=http://localhost:8000`
-- Set `DB_HOST=mysql`
+### Production
+
+For production deployments, set these in `.env`:
+
+```env
+APP_ENV=production
+APP_DEBUG=false
+INSTALL_DEV_DEPS=false
+```
+
+Then rebuild: `docker compose up -d --build`
 
 ---
 

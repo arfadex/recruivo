@@ -10,7 +10,35 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/health', function () {
+    $checks = [
+        'status' => 'healthy',
+        'timestamp' => now()->toIso8601String(),
+        'checks' => [],
+    ];
+
+    try {
+        DB::connection()->getPdo();
+        $checks['checks']['database'] = 'ok';
+    } catch (\Exception $e) {
+        $checks['checks']['database'] = 'failed';
+        $checks['status'] = 'unhealthy';
+    }
+
+    try {
+        Cache::store()->get('health_check');
+        $checks['checks']['cache'] = 'ok';
+    } catch (\Exception $e) {
+        $checks['checks']['cache'] = 'failed';
+    }
+
+    $statusCode = $checks['status'] === 'healthy' ? 200 : 503;
+    return response()->json($checks, $statusCode);
+})->name('api.health');
 
 Route::get('/jobs', [JobController::class, 'index'])->name('api.jobs.index');
 Route::get('/jobs/{job}', [JobController::class, 'show'])->name('api.jobs.show');

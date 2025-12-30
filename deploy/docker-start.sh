@@ -1,73 +1,218 @@
 #!/bin/bash
-
-# Recruivo - Docker Setup Script
-# This script helps you set up the application with Docker
-
 set -e
 
-echo "🚀 Recruivo Docker Setup"
-echo "========================"
-echo ""
+readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
+readonly MAX_RETRIES=30
+readonly RETRY_INTERVAL=2
 
-# Check if Docker is running
-if ! docker info > /dev/null 2>&1; then
-    echo "❌ Docker is not running. Please start Docker Desktop and try again."
-    exit 1
-fi
+log_info() { echo -e "\033[0;34m[INFO]\033[0m $1"; }
+log_success() { echo -e "\033[0;32m[OK]\033[0m $1"; }
+log_warning() { echo -e "\033[0;33m[WARN]\033[0m $1"; }
+log_error() { echo -e "\033[0;31m[ERROR]\033[0m $1"; }
 
-# Check if .env file exists
-if [ ! -f .env ]; then
-    echo "⚠️  No .env file found!"
+check_docker() {
+    if ! docker info > /dev/null 2>&1; then
+        log_error "Docker is not running. Please start Docker and try again."
+        exit 1
+    fi
+    log_success "Docker is running"
+}
+
+check_env_file() {
+    if [ ! -f "$PROJECT_DIR/.env" ]; then
+        log_warning "No .env file found"
+        if [ -f "$PROJECT_DIR/.env.docker.example" ]; then
+            log_info "Copying .env.docker.example to .env"
+            cp "$PROJECT_DIR/.env.docker.example" "$PROJECT_DIR/.env"
+            log_success "Created .env from template"
+        else
+            log_error "No .env.docker.example found. Please create a .env file."
+            exit 1
+        fi
+    else
+        log_success ".env file exists"
+    fi
+}
+
+wait_for_container() {
+    local container="$1"
+    local health_cmd="$2"
+    local attempt=1
+    
+    log_info "Waiting for $container to be healthy..."
+    
+    while [ $attempt -le $MAX_RETRIES ]; do
+        if docker compose exec -T "$container" $health_cmd > /dev/null 2>&1; then
+            log_success "$container is healthy"
+            return 0
+        fi
+        echo -n "."
+        sleep $RETRY_INTERVAL
+        ((attempt++))
+    done
+    
     echo ""
-    echo "📝 Please ensure you have a .env file with your settings."
-    echo "   Make sure DB_HOST=mysql (not 127.0.0.1)"
+    log_error "$container failed to become healthy after $MAX_RETRIES attempts"
+    return 1
+}
+
+run_in_container() {
+    local description="$1"
+    shift
+    
+    log_info "$description..."
+    if docker compose exec -T laravel "$@"; then
+        log_success "$description completed"
+    else
+        log_error "$description failed"
+        return 1
+    fi
+}
+
+build_and_start() {
+    log_info "Building and starting containers..."
+    docker compose up -d --build
+    log_success "Containers started"
+}
+
+generate_app_key() {
+    local current_key
+    current_key=$(grep "^APP_KEY=" "$PROJECT_DIR/.env" | cut -d '=' -f2)
+    
+    if [ -z "$current_key" ]; then
+        log_info "Generating application key..."
+        local new_key
+        new_key=$(docker run --rm php:8.2-cli php -r "echo 'base64:'.base64_encode(random_bytes(32));")
+        sed -i "s|^APP_KEY=.*|APP_KEY=$new_key|" "$PROJECT_DIR/.env"
+        log_success "Application key generated"
+    else
+        log_info "Application key already exists, skipping generation"
+    fi
+}
+
+run_setup() {
+    local run_migrations="${1:-true}"
+    local run_seeders="${2:-false}"
+    
+    
+    if [ "$run_migrations" = "true" ]; then
+        if [ "$run_seeders" = "true" ]; then
+            run_in_container "Running migrations with seeders" php artisan migrate --seed --force
+        else
+            run_in_container "Running migrations" php artisan migrate --force
+        fi
+    fi
+    
+    run_in_container "Creating storage link" php artisan storage:link || true
+}
+
+show_help() {
+    echo "Recruivo Docker Setup Script"
     echo ""
-    echo "If this is your first time, copy from .env.example:"
-    echo "   cp .env.example .env"
+    echo "Usage: $0 [OPTIONS]"
     echo ""
-    exit 1
-fi
+    echo "Options:"
+    echo "  --fresh          Fresh install with migrations and seeders"
+    echo "  --no-migrate     Skip database migrations"
+    echo "  --seed           Run database seeders"
+    echo "  --build-only     Only build containers, don't run setup"
+    echo "  --down           Stop and remove containers"
+    echo "  --logs           Show container logs"
+    echo "  --help           Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  $0                   # Standard setup with migrations"
+    echo "  $0 --fresh           # Fresh install with seed data"
+    echo "  $0 --build-only      # Just build containers"
+    echo "  $0 --down            # Stop everything"
+}
 
-# Build and start containers
-echo "🏗️  Building and starting Docker containers..."
-docker compose up -d --build
+print_success_message() {
+    echo ""
+    echo "============================================"
+    log_success "Setup complete!"
+    echo "============================================"
+    echo ""
+    echo "Application: http://localhost:${APP_PORT:-8000}"
+    echo ""
+    echo "Useful commands:"
+    echo "  docker compose logs -f              # View logs"
+    echo "  docker compose exec laravel bash    # Shell access"
+    echo "  docker compose down                 # Stop containers"
+    echo "  docker compose ps                   # Container status"
+    echo ""
+}
 
-echo ""
-echo "⏳ Waiting for MySQL to be ready..."
-sleep 10
+main() {
+    local run_migrations=true
+    local run_seeders=false
+    local build_only=false
+    
+    cd "$PROJECT_DIR"
+    
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --fresh)
+                run_seeders=true
+                shift
+                ;;
+            --no-migrate)
+                run_migrations=false
+                shift
+                ;;
+            --seed)
+                run_seeders=true
+                shift
+                ;;
+            --build-only)
+                build_only=true
+                shift
+                ;;
+            --down)
+                log_info "Stopping containers..."
+                docker compose down
+                log_success "Containers stopped"
+                exit 0
+                ;;
+            --logs)
+                docker compose logs -f
+                exit 0
+                ;;
+            --help|-h)
+                show_help
+                exit 0
+                ;;
+            *)
+                log_error "Unknown option: $1"
+                show_help
+                exit 1
+                ;;
+        esac
+    done
+    
+    echo ""
+    echo "============================================"
+    echo "       Recruivo Docker Setup"
+    echo "============================================"
+    echo ""
+    
+    check_docker
+    check_env_file
+    generate_app_key
+    build_and_start
+    
+    if [ "$build_only" = "true" ]; then
+        log_success "Build complete (setup skipped)"
+        exit 0
+    fi
+    
+    wait_for_container "mysql" "mysqladmin ping -h localhost"
+    wait_for_container "redis" "redis-cli ping"
+    
+    run_setup "$run_migrations" "$run_seeders"
+    
+    print_success_message
+}
 
-# Backend .env should already exist from earlier check
-
-# Install Composer dependencies
-echo "📦 Installing Composer dependencies..."
-docker compose exec -T laravel composer install
-
-# Install NPM dependencies
-echo "📦 Installing NPM dependencies..."
-docker compose exec -T laravel npm install
-
-# Generate application key
-echo "🔑 Generating application key..."
-docker compose exec -T laravel php artisan key:generate
-
-# Run migrations
-echo "🗄️  Running database migrations..."
-docker compose exec -T laravel php artisan migrate --seed
-
-# Build assets
-echo "🎨 Building frontend assets..."
-docker compose exec -T laravel npm run build
-
-echo ""
-echo "✅ Setup complete!"
-echo ""
-echo "📍 Your application is now running at:"
-echo "   - laravel: http://localhost:8000"
-echo ""
-echo "📝 Useful commands:"
-echo "   - View logs: docker compose logs -f"
-echo "   - Stop containers: docker compose down"
-echo "   - Run artisan: docker compose exec laravel php artisan [command]"
-echo ""
-echo "🎉 Happy coding!"
-
+main "$@"

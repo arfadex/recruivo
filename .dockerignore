@@ -55,10 +55,11 @@ desktop.ini
 .gitattributes
 .github/
 
-# Docker files (prevent recursion)
+# Docker files (prevent recursion - but allow docker/ directory)
 Dockerfile*
 docker-compose*.yml
 .dockerignore
+!docker/
 
 # CI/CD
 .gitlab-ci.yml
@@ -85,10 +86,8 @@ Vagrantfile
 auth.json
 .vagrant/
 
-# Deployment scripts
+# Deployment scripts (keep docker scripts)
 deploy/
-*.sh
-*.bat
 
 # Temporary files
 *.tmp
