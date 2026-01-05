@@ -94,10 +94,12 @@ generate_app_key() {
 run_setup() {
     local run_migrations="${1:-true}"
     local run_seeders="${2:-false}"
-    
+    local fresh_install="${3:-false}"
     
     if [ "$run_migrations" = "true" ]; then
-        if [ "$run_seeders" = "true" ]; then
+        if [ "$fresh_install" = "true" ]; then
+            run_in_container "Dropping tables and running fresh migrations with seeders" php artisan migrate:fresh --seed --force
+        elif [ "$run_seeders" = "true" ]; then
             run_in_container "Running migrations with seeders" php artisan migrate --seed --force
         else
             run_in_container "Running migrations" php artisan migrate --force
@@ -147,6 +149,7 @@ print_success_message() {
 main() {
     local run_migrations=true
     local run_seeders=false
+    local fresh_install=false
     local build_only=false
     
     cd "$PROJECT_DIR"
@@ -154,7 +157,7 @@ main() {
     while [[ $# -gt 0 ]]; do
         case $1 in
             --fresh)
-                run_seeders=true
+                fresh_install=true
                 shift
                 ;;
             --no-migrate)
@@ -210,7 +213,7 @@ main() {
     wait_for_container "mysql" "mysqladmin ping -h localhost"
     wait_for_container "redis" "redis-cli ping"
     
-    run_setup "$run_migrations" "$run_seeders"
+    run_setup "$run_migrations" "$run_seeders" "$fresh_install"
     
     print_success_message
 }
