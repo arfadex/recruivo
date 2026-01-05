@@ -4,7 +4,7 @@
     $userHasApplied = auth()->check() && auth()->user()->hasRole('Candidate') && auth()->user()->applications()->where('job_id', $job->id)->exists();
 @endphp
 
-<div class="group relative rounded-xl border border-slate-200/60 bg-white/80 p-6 shadow-sm transition hover:shadow-md dark:border-slate-700/60 dark:bg-slate-900/60">
+<div class="group relative rounded-xl border border-stone-200/60 bg-white/80 p-6 shadow-sm transition hover:shadow-md dark:border-stone-700/60 dark:bg-stone-900/60">
     {{-- Applied Badge --}}
     @if($userHasApplied)
         <div class="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-500/10 dark:text-green-400">
@@ -20,18 +20,18 @@
             @if($job->company && $job->company->logo_url)
                 <img src="{{ $job->company->logo_url }}" alt="{{ $job->company->name }}" class="h-12 w-12 flex-shrink-0 rounded-lg object-cover" />
             @else
-                <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 text-white font-semibold">
+                <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 text-white font-semibold">
                     {{ $job->company ? substr($job->company->name, 0, 1) : 'J' }}
                 </div>
             @endif
             <div class="flex-1 min-w-0">
-                <h3 class="font-semibold text-slate-900 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400 transition">
+                <h3 class="font-semibold text-stone-900 group-hover:text-amber-600 dark:text-white dark:group-hover:text-amber-400 transition">
                     {{ $job->title }}
                 </h3>
                 @if($job->company)
-                    <p class="text-sm text-slate-600 dark:text-slate-400">{{ $job->company->name }}</p>
+                    <p class="text-sm text-stone-600 dark:text-stone-400">{{ $job->company->name }}</p>
                 @endif
-                <div class="mt-2 flex flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400">
+                <div class="mt-2 flex flex-wrap gap-2 text-xs text-stone-500 dark:text-stone-400">
                     @if($job->location)
                         <span class="flex items-center gap-1">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -44,20 +44,20 @@
                     @if($job->remote_type)
                         <a href="{{ localized_route('search', ['search' => '', 'remote_type' => strtolower($job->remote_type)]) }}" 
                            onclick="event.stopPropagation()" 
-                           class="rounded-full bg-indigo-100 px-2 py-0.5 font-medium text-indigo-700 transition hover:bg-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-300 dark:hover:bg-indigo-500/20">
+                           class="rounded-full bg-amber-100 px-2 py-0.5 font-medium text-amber-700 transition hover:bg-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:hover:bg-amber-500/20">
                             {{ ucfirst($job->remote_type) }}
                         </a>
                     @endif
                     @if($job->category)
                         <a href="{{ localized_route('search', ['search' => $job->category]) }}" 
                            onclick="event.stopPropagation()" 
-                           class="rounded-full bg-slate-100 px-2 py-0.5 font-medium text-slate-700 transition hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600">
+                           class="rounded-full bg-stone-100 px-2 py-0.5 font-medium text-stone-700 transition hover:bg-stone-200 dark:bg-stone-700 dark:text-stone-300 dark:hover:bg-stone-600">
                             {{ $job->category }}
                         </a>
                     @endif
                 </div>
                 @if($job->salary_min || $job->salary_max)
-                    <p class="mt-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <p class="mt-2 text-sm font-medium text-stone-700 dark:text-stone-300">
                         ${{ number_format($job->salary_min ?? 0) }} - ${{ number_format($job->salary_max ?? 0) }}
                     </p>
                 @endif

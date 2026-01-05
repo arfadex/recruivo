@@ -18,7 +18,7 @@ ensure_directories() {
 }
 
 fix_permissions() {
-    chown -R www-data:www-data storage bootstrap/cache
+    chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
     chmod -R 775 storage bootstrap/cache
 }
 
@@ -48,34 +48,45 @@ run_migrations() {
     fi
 }
 
-optimize_laravel() {
-    if [ "${APP_ENV:-production}" = "production" ]; then
-        echo "Optimizing Laravel for production..."
-        php artisan config:cache
-        php artisan route:cache
-        php artisan view:cache
-        php artisan event:cache
-    else
-        echo "Development mode - clearing caches..."
-        php artisan config:clear || true
-        php artisan cache:clear || true
-        php artisan route:clear || true
-        php artisan view:clear || true
-    fi
+clear_caches() {
+    echo "Development mode - clearing caches..."
+    php artisan config:clear 2>/dev/null || true
+    php artisan cache:clear 2>/dev/null || true
+    php artisan route:clear 2>/dev/null || true
+    php artisan view:clear 2>/dev/null || true
 }
 
 create_storage_link() {
     if [ ! -L "public/storage" ]; then
-        php artisan storage:link || true
+        php artisan storage:link 2>/dev/null || true
+    fi
+}
+
+install_dependencies() {
+    if [ ! -d "vendor" ] || [ ! -f "vendor/autoload.php" ]; then
+        echo "Installing Composer dependencies..."
+        composer install --no-interaction --prefer-dist
+    fi
+    
+    if [ ! -d "node_modules" ]; then
+        echo "Installing npm dependencies..."
+        npm ci
+    fi
+}
+
+start_vite_dev_server() {
+    if [ "${VITE_DEV:-true}" = "true" ]; then
+        echo "Starting Vite dev server in background..."
+        npm run dev -- --host 0.0.0.0 &
     fi
 }
 
 main() {
-    echo "=== Laravel Docker Entrypoint ==="
-    echo "Environment: ${APP_ENV:-production}"
+    echo "=== Laravel Development Docker Entrypoint ==="
     
     ensure_directories
     fix_permissions
+    install_dependencies
     
     if [ -n "$DB_HOST" ]; then
         wait_for_service "$DB_HOST" "${DB_PORT:-3306}"
@@ -86,8 +97,9 @@ main() {
     fi
     
     run_migrations
-    optimize_laravel
+    clear_caches
     create_storage_link
+    start_vite_dev_server
     
     echo "=== Starting Apache ==="
     exec "$@"

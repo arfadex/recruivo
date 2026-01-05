@@ -14,19 +14,19 @@ html.dark {
 
 html {
   font-family: theme('fontFamily.sans');
-  background-color: theme('colors.slate.100');
+  background-color: theme('colors.stone.100');
 }
 
 body {
   min-height: 100vh;
-  background-image: radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.18), transparent 55%),
-      radial-gradient(circle at 100% 0%, rgba(244, 114, 182, 0.14), transparent 50%),
-      radial-gradient(circle at 50% 100%, rgba(14, 165, 233, 0.12), transparent 55%);
-  @apply text-slate-900 antialiased transition-colors duration-300;
+  background-image: radial-gradient(circle at 0% 0%, rgba(217, 119, 6, 0.08), transparent 55%),
+      radial-gradient(circle at 100% 0%, rgba(15, 118, 110, 0.06), transparent 50%),
+      radial-gradient(circle at 50% 100%, rgba(120, 113, 108, 0.05), transparent 55%);
+  @apply text-stone-900 antialiased transition-colors duration-300;
 }
 
 .dark body {
-  @apply bg-slate-950 text-slate-100;
+  @apply bg-stone-950 text-stone-100;
 }
 
 h1, h2, h3, h4 {
@@ -35,7 +35,7 @@ h1, h2, h3, h4 {
 }
 
 ::selection {
-  background-color: theme('colors.indigo.500');
+  background-color: theme('colors.amber.600');
   color: theme('colors.white');
 }
 
@@ -44,7 +44,7 @@ a {
 }
 
 input, select, textarea {
-  @apply focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 dark:focus:ring-indigo-500 dark:focus:border-indigo-500;
+  @apply focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-400 dark:focus:ring-amber-500 dark:focus:border-amber-500;
 }
 
 /* Alpine.js x-cloak directive */

@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="mx-auto flex max-w-xl flex-col items-center py-12">
-    <div class="w-full space-y-8 rounded-3xl border border-slate-200/70 bg-white/80 p-10 shadow-2xl shadow-indigo-500/10 dark:border-slate-800/60 dark:bg-slate-950/80">
+    <div class="w-full space-y-8 rounded-3xl border border-stone-200/70 bg-white/80 p-10 shadow-2xl shadow-amber-500/10 dark:border-stone-800/60 dark:bg-stone-950/80">
         <div class="space-y-3 text-center">
-            <h1 class="font-display text-3xl font-bold text-slate-900 dark:text-white">{{ __('auth.register_title') }}</h1>
-            <p class="text-sm text-slate-500 dark:text-slate-400">
+            <h1 class="font-display text-3xl font-bold text-stone-900 dark:text-white">{{ __('auth.register_title') }}</h1>
+            <p class="text-sm text-stone-500 dark:text-stone-400">
                 {{ __('auth.register_subtitle') }}
             </p>
         </div>
@@ -23,14 +23,14 @@
             
             <!-- Account Type Selection -->
             <div class="space-y-3">
-                <label class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                <label class="text-sm font-medium text-stone-700 dark:text-stone-200">
                     {{ __('auth.account_type') }}
                 </label>
                 <div class="grid grid-cols-2 gap-3">
                     <button
                         type="button"
                         @click="accountType = 'candidate'"
-                        :class="accountType === 'candidate' ? 'border-indigo-500 bg-indigo-50 text-indigo-700 dark:border-indigo-400 dark:bg-indigo-900/20 dark:text-indigo-300' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-600'"
+                        :class="accountType === 'candidate' ? 'border-amber-500 bg-amber-50 text-amber-700 dark:border-amber-400 dark:bg-amber-900/20 dark:text-amber-300' : 'border-stone-200 bg-white text-stone-600 hover:border-stone-300 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-300 dark:hover:border-stone-600'"
                         class="rounded-xl border p-3 text-left text-sm transition"
                     >
                         <div class="font-medium">{{ __('auth.account_type_candidate') }}</div>
@@ -39,7 +39,7 @@
                     <button
                         type="button"
                         @click="accountType = 'company'"
-                        :class="accountType === 'company' ? 'border-indigo-500 bg-indigo-50 text-indigo-700 dark:border-indigo-400 dark:bg-indigo-900/20 dark:text-indigo-300' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-600'"
+                        :class="accountType === 'company' ? 'border-amber-500 bg-amber-50 text-amber-700 dark:border-amber-400 dark:bg-amber-900/20 dark:text-amber-300' : 'border-stone-200 bg-white text-stone-600 hover:border-stone-300 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-300 dark:hover:border-stone-600'"
                         class="rounded-xl border p-3 text-left text-sm transition"
                     >
                         <div class="font-medium">{{ __('auth.account_type_company') }}</div>
@@ -51,7 +51,7 @@
 
             <!-- Candidate Name -->
             <div x-show="accountType === 'candidate'" class="space-y-2">
-                <label for="name" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                <label for="name" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                     {{ __('auth.full_name') }}
                 </label>
                 <input
@@ -61,13 +61,13 @@
                     autocomplete="name"
                     placeholder="{{ __('auth.full_name_placeholder') }}"
                     value="{{ old('name') }}"
-                    class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                    class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                 />
             </div>
 
             <!-- Email -->
             <div class="space-y-2">
-                <label for="email" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                <label for="email" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                     {{ __('auth.email') }}
                 </label>
                 <input
@@ -78,13 +78,13 @@
                     placeholder="{{ __('auth.email_placeholder') }}"
                     required
                     value="{{ old('email') }}"
-                    class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                    class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                 />
             </div>
 
             <!-- Phone (Candidate only) -->
             <div x-show="accountType === 'candidate'" class="space-y-2">
-                <label for="phone" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                <label for="phone" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                     {{ __('auth.phone_number_optional') }}
                 </label>
                 <input
@@ -94,13 +94,13 @@
                     autocomplete="tel"
                     placeholder="+21261234567"
                     value="{{ old('phone') }}"
-                    class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                    class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                 />
             </div>
 
             <!-- Password -->
             <div class="space-y-2">
-                <label for="password" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                <label for="password" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                     {{ __('auth.password') }}
                 </label>
                 <div class="relative">
@@ -111,12 +111,12 @@
                         autocomplete="new-password"
                         placeholder="{{ __('auth.password_create_placeholder') }}"
                         required
-                        class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 pr-12 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                        class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 pr-12 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                     />
                     <button
                         type="button"
                         @click="showPassword = !showPassword"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 dark:text-stone-500 dark:hover:text-stone-300"
                     >
                         <svg x-show="!showPassword" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -131,7 +131,7 @@
 
             <!-- Password Confirmation -->
             <div class="space-y-2">
-                <label for="password_confirmation" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                <label for="password_confirmation" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                     {{ __('auth.confirm_password_label') }}
                 </label>
                 <div class="relative">
@@ -142,12 +142,12 @@
                         autocomplete="new-password"
                         placeholder="{{ __('auth.password_confirm_placeholder') }}"
                         required
-                        class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 pr-12 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                        class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 pr-12 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                     />
                     <button
                         type="button"
                         @click="showPasswordConfirmation = !showPasswordConfirmation"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 dark:text-stone-500 dark:hover:text-stone-300"
                     >
                         <svg x-show="!showPasswordConfirmation" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -162,7 +162,7 @@
 
             <!-- Resume Upload (Candidate only) -->
             <div x-show="accountType === 'candidate'" class="space-y-2">
-                <label for="resume" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                <label for="resume" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                     {{ __('auth.resume_optional') }}
                 </label>
                 <input
@@ -170,9 +170,9 @@
                     name="resume"
                     type="file"
                     accept=".pdf,.doc,.docx"
-                    class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                    class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                 />
-                <p class="text-xs text-slate-500 dark:text-slate-400">
+                <p class="text-xs text-stone-500 dark:text-stone-400">
                     {{ __('auth.resume_help_text') }}
                 </p>
             </div>
@@ -181,7 +181,7 @@
             <template x-if="accountType === 'company'">
                 <div class="space-y-6">
                     <div class="space-y-2">
-                        <label for="recruiter_name" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                        <label for="recruiter_name" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                             {{ __('auth.your_full_name') }}
                         </label>
                         <input
@@ -190,15 +190,15 @@
                             type="text"
                             placeholder="{{ __('auth.your_full_name_placeholder') }}"
                             value="{{ old('name') }}"
-                            class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                            class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                         />
-                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                        <p class="text-xs text-stone-500 dark:text-stone-400">
                             {{ __('auth.recruiter_name_help') }}
                         </p>
                     </div>
 
                     <div class="space-y-2">
-                        <label for="company_name" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                        <label for="company_name" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                             {{ __('auth.company_name_label') }}
                         </label>
                         <input
@@ -207,12 +207,12 @@
                             type="text"
                             placeholder="{{ __('auth.company_name_placeholder') }}"
                             value="{{ old('company.name') }}"
-                            class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                            class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                         />
                     </div>
 
                     <div class="space-y-2">
-                        <label for="company_email" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                        <label for="company_email" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                             {{ __('auth.company_email') }}
                         </label>
                         <input
@@ -221,15 +221,15 @@
                             type="email"
                             placeholder="{{ __('auth.company_email_placeholder') }}"
                             value="{{ old('company.email') }}"
-                            class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                            class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                         />
-                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                        <p class="text-xs text-stone-500 dark:text-stone-400">
                             {{ __('auth.company_email_help') }}
                         </p>
                     </div>
 
                     <div class="space-y-2">
-                        <label for="company_tagline" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                        <label for="company_tagline" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                             {{ __('auth.company_tagline_optional') }}
                         </label>
                         <input
@@ -238,12 +238,12 @@
                             type="text"
                             placeholder="{{ __('auth.company_tagline_placeholder') }}"
                             value="{{ old('company.tagline') }}"
-                            class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                            class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                         />
                     </div>
 
                     <div class="space-y-2">
-                        <label for="company_location" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                        <label for="company_location" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                             {{ __('auth.company_location_optional') }}
                         </label>
                         <input
@@ -252,12 +252,12 @@
                             type="text"
                             placeholder="{{ __('auth.company_location_placeholder') }}"
                             value="{{ old('company.location') }}"
-                            class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                            class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                         />
                     </div>
 
                     <div class="space-y-2">
-                        <label for="company_website" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                        <label for="company_website" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                             {{ __('auth.website_url_optional') }}
                         </label>
                         <input
@@ -266,12 +266,12 @@
                             type="url"
                             placeholder="{{ __('auth.website_url_placeholder') }}"
                             value="{{ old('company.website_url') }}"
-                            class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                            class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                         />
                     </div>
 
                     <div class="space-y-2">
-                        <label for="company_linkedin" class="text-sm font-medium text-slate-700 dark:text-slate-200">
+                        <label for="company_linkedin" class="text-sm font-medium text-stone-700 dark:text-stone-200">
                             {{ __('auth.linkedin_url_optional') }}
                         </label>
                         <input
@@ -280,7 +280,7 @@
                             type="url"
                             placeholder="{{ __('auth.linkedin_url_placeholder') }}"
                             value="{{ old('company.linkedin_url') }}"
-                            class="w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-indigo-500"
+                            class="w-full rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3 text-sm text-stone-700 shadow-sm transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-100 dark:focus:border-amber-500"
                         />
                     </div>
                 </div>
@@ -288,15 +288,15 @@
 
             <button
                 type="submit"
-                class="inline-flex w-full items-center justify-center rounded-2xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-offset-2 dark:focus:ring-offset-slate-950"
+                class="inline-flex w-full items-center justify-center rounded-2xl bg-amber-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:ring-offset-2 dark:focus:ring-offset-stone-950"
             >
                 {{ __('auth.create_account_button') }}
             </button>
         </form>
 
-        <p class="text-center text-sm text-slate-500 dark:text-slate-400">
+        <p class="text-center text-sm text-stone-500 dark:text-stone-400">
             {{ __('auth.already_member') }}
-            <a href="{{ localized_route('login') }}" class="font-semibold text-indigo-600 transition hover:text-indigo-500 dark:text-indigo-300 dark:hover:text-indigo-200">
+            <a href="{{ localized_route('login') }}" class="font-semibold text-amber-600 transition hover:text-amber-500 dark:text-amber-300 dark:hover:text-amber-200">
                 {{ __('auth.sign_in') }}
             </a>
         </p>

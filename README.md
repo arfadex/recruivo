@@ -12,12 +12,14 @@ Application runs locally or via Docker (PHP 8.2 + Apache, MySQL 8, Redis 7). Thi
 - Admin: basic user management dashboard
 - Email verification flow
 - Modern asset pipeline with Vite and Tailwind CSS
+- Multi-language support (English, French)
+- Dark mode support
 
 ## Tech Stack
 
 - PHP 8.2, Laravel 12
 - MySQL 8, Redis 7
-- Node.js 20, Vite, Tailwind
+- Node.js 20, Vite, Tailwind CSS
 - Packages: Sanctum, Spatie Permission, Translatable
 
 ---
@@ -48,7 +50,6 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=noreply@recruivo.work
 MAIL_FROM_NAME="${APP_NAME}"
 ```
-If you plan to run the separate frontend, also set `FRONTEND_URL` (defaults to `http://localhost:3000`).
 
 3) Database and storage
 ```bash
@@ -62,84 +63,135 @@ php artisan serve
 ```
 Vite (choose one):
 ```bash
-npm run dev
-# or
-npm run build
+npm run dev   # Development with HMR
+npm run build # Production build
 ```
 
-Open: `http://localhost:8000/`.
+Open: `http://localhost:8000/`
 
 ---
 
-## Run with Docker (Recommended)
+## Docker Setup
 
-The easiest way to get Recruivo running. A single command handles environment setup, container building, and database initialization.
+Two Docker workflows are available:
 
-### Quick Start
+| Workflow | Script | Use Case |
+|----------|--------|----------|
+| **Production** | `./deploy/docker-start.sh` | Pre-built assets, optimized image |
+| **Development** | `./deploy/docker-dev.sh` | Live editing, Xdebug |
+
+### Production (Quick Demo)
 
 ```bash
+chmod +x deploy/docker-start.sh
 ./deploy/docker-start.sh --fresh
 ```
 
 This automatically:
 - Creates `.env` from `.env.docker.example` (if missing)
 - Generates `APP_KEY` (if empty)
-- Builds the multi-stage Docker image
+- Builds the multi-stage Docker image with pre-built assets
 - Waits for MySQL and Redis health checks
 - Runs database migrations and seeders
 
-Application available at: **http://localhost:8000**
+Open: `http://localhost:8000/`
 
-### CLI Options
+**How it works**: Assets (CSS/JS) are "baked into" the Docker image during build. If you change frontend files, you must rebuild:
+```bash
+./deploy/docker-start.sh --build
+```
+
+### Development (Active Coding)
+
+```bash
+chmod +x deploy/docker-dev.sh
+./deploy/docker-dev.sh --fresh
+```
+
+**How it works**: Your local files are mounted into the container via volumes:
+
+```
+Your Machine                    Docker Container
+─────────────                   ────────────────
+./app/           ──────────►    /var/www/html/app/
+./resources/     ──────────►    /var/www/html/resources/
+./routes/        ──────────►    /var/www/html/routes/
+./config/        ──────────►    /var/www/html/config/
+```
+
+This means:
+- **PHP/Blade changes** → Instant (just refresh browser)
+- **CSS/JS changes** → Run `./deploy/docker-dev.sh --npm run build`
+
+Features:
+- **Live code editing**: PHP, Blade, config changes reflect immediately
+- **Xdebug**: Debugging enabled out of the box
+- **Node.js inside container**: Run npm commands without local Node
+
+### Development Commands
+
+```bash
+./deploy/docker-dev.sh --shell           # Bash shell inside container
+./deploy/docker-dev.sh --artisan tinker  # Run artisan commands
+./deploy/docker-dev.sh --npm run build   # Rebuild CSS/JS after changes
+./deploy/docker-dev.sh --logs            # View container logs
+./deploy/docker-dev.sh --down            # Stop containers
+```
+
+### Quick Comparison
+
+| Aspect | Production | Development |
+|--------|------------|-------------|
+| Script | `docker-start.sh` | `docker-dev.sh` |
+| PHP changes | Requires rebuild | Instant |
+| CSS/JS changes | Requires rebuild | Run `--npm run build` |
+| Xdebug | No | Yes |
+| Use case | Demo / Deploy | Active development |
+
+### CLI Options (both scripts)
 
 | Option | Description |
 |--------|-------------|
 | `--fresh` | Fresh install with migrations and seeders |
 | `--seed` | Run database seeders |
 | `--no-migrate` | Skip database migrations |
-| `--build-only` | Build containers only, skip setup |
+| `--build` | Force rebuild containers |
 | `--down` | Stop and remove containers |
 | `--logs` | View container logs |
 | `--help` | Show help message |
 
 ### Architecture
 
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Docker Compose                        │
+├─────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │
+│  │   Laravel   │  │    MySQL    │  │    Redis    │     │
+│  │  (Apache)   │  │     8.0     │  │   7-alpine  │     │
+│  │  Port 8000  │  │  Port 3306  │  │  Port 6379  │     │
+│  └─────────────┘  └─────────────┘  └─────────────┘     │
+└─────────────────────────────────────────────────────────┘
+```
+
 | Container | Description |
 |-----------|-------------|
-| `recruivo` | PHP 8.2 + Apache (Laravel app with pre-built Vite assets) |
+| `recruivo` | PHP 8.2 + Apache |
 | `recruivo_mysql` | MySQL 8.0 |
 | `recruivo_redis` | Redis 7 (cache, sessions, queues) |
 
 ### Common Operations
 
 ```bash
-# Shell access
+# Shell access (production)
 docker compose exec laravel bash
 
-# Artisan commands
-docker compose exec laravel php artisan tinker
+# Shell access (development)
+./deploy/docker-dev.sh --shell
 
-# View logs
-docker compose logs -f
-
-# Rebuild after code changes
-docker compose up -d --build
-
-# Full reset (wipe data)
+# Full reset (wipe all data)
 docker compose down -v && ./deploy/docker-start.sh --fresh
 ```
-
-### Production
-
-For production deployments, set these in `.env`:
-
-```env
-APP_ENV=production
-APP_DEBUG=false
-INSTALL_DEV_DEPS=false
-```
-
-Then rebuild: `docker compose up -d --build`
 
 ---
 
@@ -147,9 +199,11 @@ Then rebuild: `docker compose up -d --build`
 
 Use these to explore the app:
 
-- Admin: `admin@recruivo.work` / `password`
-- Recruiter: `recruiter@recruivo.work` / `password`
-- Candidate: `candidate@recruivo.work` / `password`
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | `admin@recruivo.work` | `password` |
+| Recruiter | `recruiter@recruivo.work` | `password` |
+| Candidate | `candidate@recruivo.work` | `password` |
 
 ---
 

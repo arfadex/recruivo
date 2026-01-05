@@ -48,6 +48,7 @@ return [
     'account_type_candidate' => 'Candidate',
     'account_type_candidate_desc' => 'Find your next role',
     'account_type_company' => 'Company',
+    'account_type_company_desc' => 'Recruit top talent',
     'full_name' => 'Full name',
     'full_name_placeholder' => 'John Doe',
     'company_name_placeholder' => 'Acme Inc.',

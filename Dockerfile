@@ -21,7 +21,18 @@ RUN npm run build
 # =============================================================================
 # Stage 2: Install PHP dependencies
 # =============================================================================
-FROM composer:2 AS composer-builder
+FROM php:8.2-cli AS composer-builder
+
+# Copy composer binary from official image
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Install required PHP extensions for composer
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    unzip \
+    libzip-dev \
+    && docker-php-ext-install zip \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -79,7 +90,9 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         bcmath \
         zip \
         gd \
-        opcache
+        opcache \
+    && pecl install redis \
+    && docker-php-ext-enable redis
 
 # Configure OPcache for production
 RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/opcache.ini \

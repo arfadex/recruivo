@@ -4,12 +4,12 @@
 <div class="space-y-8">
     <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">{{ __('recruiter.my_job_listings') }}</h1>
-            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 sm:text-base">{{ __('recruiter.my_job_listings_subtitle') }}</p>
+            <h1 class="text-2xl font-bold text-stone-900 dark:text-white sm:text-3xl">{{ __('recruiter.my_job_listings') }}</h1>
+            <p class="mt-2 text-sm text-stone-600 dark:text-stone-400 sm:text-base">{{ __('recruiter.my_job_listings_subtitle') }}</p>
         </div>
         <a 
             href="{{ localized_route('recruiter.jobs.create') }}" 
-            class="inline-flex items-center justify-center rounded-2xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 sm:px-6 sm:py-3"
+            class="inline-flex items-center justify-center rounded-2xl bg-amber-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 sm:px-6 sm:py-3"
         >
             <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -32,17 +32,17 @@
     @endif
 
     @if($jobs->isEmpty())
-        <div class="rounded-xl border border-slate-200/60 bg-white/80 p-12 text-center backdrop-blur dark:border-slate-700/60 dark:bg-slate-900/60">
-            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-500/10">
-                <svg class="h-8 w-8 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <div class="rounded-xl border border-stone-200/60 bg-white/80 p-12 text-center backdrop-blur dark:border-stone-700/60 dark:bg-stone-900/60">
+            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-500/10">
+                <svg class="h-8 w-8 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
                 </svg>
             </div>
-            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">{{ __('recruiter.no_job_listings') }}</h3>
-            <p class="text-slate-600 dark:text-slate-400 mb-6">{{ __('recruiter.get_started_posting') }}</p>
+            <h3 class="text-lg font-semibold text-stone-900 dark:text-white mb-2">{{ __('recruiter.no_job_listings') }}</h3>
+            <p class="text-stone-600 dark:text-stone-400 mb-6">{{ __('recruiter.get_started_posting') }}</p>
             <a 
                 href="{{ localized_route('recruiter.jobs.create') }}" 
-                class="inline-flex items-center justify-center rounded-2xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                class="inline-flex items-center justify-center rounded-2xl bg-amber-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200"
             >
                 {{ __('recruiter.post_first_job') }}
             </a>
@@ -50,11 +50,11 @@
     @else
         <div class="space-y-4">
             @foreach($jobs as $job)
-                <div class="rounded-xl border border-slate-200/60 bg-white/80 p-4 backdrop-blur dark:border-slate-700/60 dark:bg-slate-900/60 transition hover:border-indigo-200 dark:hover:border-indigo-800 sm:p-6">
+                <div class="rounded-xl border border-stone-200/60 bg-white/80 p-4 backdrop-blur dark:border-stone-700/60 dark:bg-stone-900/60 transition hover:border-amber-200 dark:hover:border-amber-800 sm:p-6">
                     <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div class="flex-1">
                             <div class="flex items-center gap-3 mb-2">
-                                <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
+                                <h3 class="text-xl font-semibold text-stone-900 dark:text-white">
                                     {{ $job->title }}
                                 </h3>
                                 @if($job->status->value === 'published')
@@ -65,7 +65,7 @@
                                         {{ __('recruiter.published') }}
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 dark:bg-slate-500/10 dark:text-slate-400">
+                                    <span class="inline-flex items-center rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-700 dark:bg-stone-500/10 dark:text-stone-400">
                                         <svg class="mr-1 h-3 w-3" fill="currentColor" viewBox="0 0 8 8">
                                             <circle cx="4" cy="4" r="3" />
                                         </svg>
@@ -74,7 +74,7 @@
                                 @endif
                             </div>
 
-                            <div class="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400 mb-3">
+                            <div class="flex flex-wrap items-center gap-4 text-sm text-stone-600 dark:text-stone-400 mb-3">
                                 @if($job->location)
                                     <div class="flex items-center gap-1">
                                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -85,12 +85,12 @@
                                     </div>
                                 @endif
                                 @if($job->remote_type)
-                                    <span class="rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300">
+                                    <span class="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">
                                         {{ __('recruiter.' . str_replace('-', '', strtolower($job->remote_type))) }}
                                     </span>
                                 @endif
                                 @if($job->category)
-                                    <span class="rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
+                                    <span class="rounded-full bg-teal-100 px-2.5 py-0.5 text-xs font-medium text-teal-700 dark:bg-teal-500/10 dark:text-teal-300">
                                         {{ $job->category }}
                                     </span>
                                 @endif
@@ -98,13 +98,13 @@
 
                             <div class="flex items-center gap-6 text-sm">
                                 <div class="flex items-center gap-2">
-                                    <svg class="h-5 w-5 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <svg class="h-5 w-5 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                     </svg>
-                                    <span class="font-medium text-slate-900 dark:text-white">{{ $job->applications_count }}</span>
-                                    <span class="text-slate-600 dark:text-slate-400">{{ trans_choice('recruiter.applications_count', $job->applications_count) }}</span>
+                                    <span class="font-medium text-stone-900 dark:text-white">{{ $job->applications_count }}</span>
+                                    <span class="text-stone-600 dark:text-stone-400">{{ trans_choice('recruiter.applications_count', $job->applications_count) }}</span>
                                 </div>
-                                <div class="text-slate-500 dark:text-slate-500">
+                                <div class="text-stone-500 dark:text-stone-500">
                                     {{ __('recruiter.posted_time', ['time' => $job->created_at->diffForHumans()]) }}
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                         <div class="flex flex-wrap items-center gap-2 sm:ml-4">
                             <a 
                                 href="{{ localized_route('recruiter.jobs.applications', $job) }}" 
-                                class="inline-flex items-center justify-center rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+                                class="inline-flex items-center justify-center rounded-lg bg-stone-100 px-3 py-2 text-sm font-medium text-stone-700 transition hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-300 dark:hover:bg-stone-700"
                                 title="{{ __('recruiter.view_applications_title') }}"
                             >
                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -124,7 +124,7 @@
 
                             <a 
                                 href="{{ localized_route('recruiter.jobs.edit', $job) }}" 
-                                class="inline-flex items-center justify-center rounded-lg bg-indigo-100 px-3 py-2 text-sm font-medium text-indigo-700 transition hover:bg-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-400 dark:hover:bg-indigo-500/20"
+                                class="inline-flex items-center justify-center rounded-lg bg-amber-100 px-3 py-2 text-sm font-medium text-amber-700 transition hover:bg-amber-200 dark:bg-amber-500/10 dark:text-amber-400 dark:hover:bg-amber-500/20"
                                 title="{{ __('recruiter.edit_job_title_attr') }}"
                             >
                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -168,13 +168,13 @@
                                     <div x-show="showModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
                                         <div class="flex min-h-screen items-center justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
                                             <!-- Background overlay -->
-                                            <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-slate-900/75 backdrop-blur-sm transition-opacity" @click="showModal = false"></div>
+                                            <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-stone-900/75 backdrop-blur-sm transition-opacity" @click="showModal = false"></div>
 
                                             <!-- Center modal -->
                                             <span class="hidden sm:inline-block sm:h-screen sm:align-middle">&#8203;</span>
 
                                             <!-- Modal panel -->
-                                            <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block transform overflow-hidden rounded-2xl border border-slate-200/60 bg-white/95 text-left align-bottom shadow-2xl backdrop-blur transition-all dark:border-slate-700/60 dark:bg-slate-900/95 sm:my-8 sm:w-full sm:max-w-lg sm:align-middle">
+                                            <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block transform overflow-hidden rounded-2xl border border-stone-200/60 bg-white/95 text-left align-bottom shadow-2xl backdrop-blur transition-all dark:border-stone-700/60 dark:bg-stone-900/95 sm:my-8 sm:w-full sm:max-w-lg sm:align-middle">
                                                 <div class="p-6 sm:p-8">
                                                     <div class="flex items-start">
                                                         <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/20">
@@ -184,25 +184,25 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-4 text-center">
-                                                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
+                                                        <h3 class="text-xl font-semibold text-stone-900 dark:text-white">
                                                             {{ __('recruiter.delete_job_title') }}
                                                         </h3>
                                                         <div class="mt-3">
-                                                            <p class="text-sm text-slate-600 dark:text-slate-400">
+                                                            <p class="text-sm text-stone-600 dark:text-stone-400">
                                                                 {{ __('recruiter.delete_job_confirm') }}
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="bg-slate-50/80 px-6 py-4 dark:bg-slate-800/40 sm:flex sm:flex-row-reverse sm:px-8">
+                                                <div class="bg-stone-50/80 px-6 py-4 dark:bg-stone-800/40 sm:flex sm:flex-row-reverse sm:px-8">
                                                     <form method="POST" action="{{ localized_route('recruiter.jobs.destroy', $job) }}" class="w-full sm:w-auto">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="inline-flex w-full justify-center rounded-2xl bg-red-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/30 transition hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 sm:w-auto">
+                                                        <button type="submit" class="inline-flex w-full justify-center rounded-2xl bg-red-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/30 transition hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900 sm:w-auto">
                                                             {{ __('recruiter.delete_job') }}
                                                         </button>
                                                     </form>
-                                                    <button @click="showModal = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-2xl border border-slate-200/80 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-200 dark:hover:bg-slate-700 dark:focus:ring-offset-slate-900 sm:mr-3 sm:mt-0 sm:w-auto">
+                                                    <button @click="showModal = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-2xl border border-stone-200/80 bg-white px-6 py-3 text-sm font-semibold text-stone-700 shadow-sm transition hover:bg-stone-50 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:border-stone-700 dark:bg-stone-800/80 dark:text-stone-200 dark:hover:bg-stone-700 dark:focus:ring-offset-stone-900 sm:mr-3 sm:mt-0 sm:w-auto">
                                                         {{ __('common.cancel') }}
                                                     </button>
                                                 </div>

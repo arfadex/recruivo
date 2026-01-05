@@ -43,7 +43,7 @@ return [
     'showing_results' => 'Affichage :count résultat(s)',
     'for' => 'pour',
     'pagination_showing' => 'Affichage de :from à :to sur :total résultats',
-    'footer_text' => '© 2025 Recruivo. Conçu pour les équipes de recrutement modernes.',
+    'footer_text' => '© :year Recruivo. Conçu pour les équipes de recrutement modernes.',
     'previous' => 'Précédent',
     'next' => 'Suivant',
     'all' => 'Tout',
